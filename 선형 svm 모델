@@ -1,0 +1,11 @@
+#데이터 분할(train)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#선형 svm 모델 생성
+svm_linear = Pipeline([
+    ("scaler", StandardScaler()),
+    ("svm", LinearSVC(C=1, loss='hinge'))
+])
+
+#모델 학습
+svm_linear.fit(X_train, y_train)
