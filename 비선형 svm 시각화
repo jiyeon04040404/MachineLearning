@@ -1,0 +1,5 @@
+# 비선형 SVM 결정 경계 시각화
+viz_rbf = DecisionViz(svm_rbf.named_steps['svm'], title="비선형 svm 결정 경계")
+viz_rbf.fit(X_train, y_train)
+viz_rbf.draw(X_test, y_test)
+plt.show()
