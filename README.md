@@ -1,2 +1,0 @@
-# MachineLearning
-2024-1학기 머신러닝 설계과제
