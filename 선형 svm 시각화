@@ -1,5 +1,5 @@
 #선형 svm 결정 경계 시각화
-viz = DecisionViz(svm_linear.named_steps['svm'], title="선형 svm 결정 경계")
-viz.fit(X_train, y_train)
-viz.draw(X_test, y_test)
+viz_linear = DecisionViz(svm_linear.named_steps['svm'], title="선형 svm 결정 경계")
+viz_linear.fit(X_train, y_train)
+viz_linear.draw(X_test, y_test)
 plt.show()
