@@ -1,0 +1,6 @@
+#예측 정확도
+linear_accuracy = svm_linear.score(X_test, y_test)
+rbf_accuracy = svm_rbf.score(X_test, y_test)
+
+print(f"선형 svm 정확도 : {linear_accuracy}")
+print(f"비선형 svm 정확도 : {rbf_accuracy}")
