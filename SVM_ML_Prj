@@ -1,0 +1,61 @@
+from sklearn.datasets import load_iris
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+from sklearn.svm import LinearSVC
+from yellowbrick.contrib.classifier import DecisionViz
+from sklearn.metrics import accuracy_score
+
+#make random dataset
+iris = load_iris()
+X0, y0 = iris.data, iris.target
+
+X=X0[:100,0:2]+ 3* np.random.rand(100,2)
+y=y0[:100]
+
+#define model pipeline
+svm_linear = Pipeline([
+  ("scaler", StandardScaler()),
+  ("svm", LinearSVC(C=1, loss='hinge')),
+])
+
+svm_nonlinear_poly = Pipeline([
+    ("scaler", StandardScaler()),
+    ("svm", SVC(C=1, kernel = 'poly', degree = 6, coef0=2)),
+])
+
+svm_nonlinear_rbf = Pipeline([
+    ("scaler", StandardScaler()),
+    ("svm", SVC(C=0.1, kernel = 'rbf', gamma = 50, random_state=42)),
+])
+
+
+#linear
+svm_linear.fit(X, y) 
+viz = DecisionViz(svm_linear, title="linear SVM")
+viz.fit(X, y)
+viz.draw(X, y)
+
+y_pred = svm_linear.predict(X)
+accuracy_score(y,y_pred)
+
+
+#poly
+svm_nonlinear_poly.fit(X, y) 
+viz = DecisionViz(svm_nonlinear_poly, title="nonlinear SVM (poly)")
+viz.fit(X, y)
+viz.draw(X, y)
+
+y_pred = svm_nonlinear_poly.predict(X)
+accuracy_score(y,y_pred)
+
+
+#rbf
+svm_nonlinear_rbf.fit(X, y) 
+viz = DecisionViz(svm_nonlinear_rbf, title="nonlinear SVM (rbf)")
+viz.fit(X, y)
+viz.draw(X, y)
+
+y_pred = svm_nonlinear_rbf.predict(X)
+accuracy_score(y,y_pred)
